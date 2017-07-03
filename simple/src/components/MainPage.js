@@ -1,13 +1,15 @@
 import React from 'react'
 import { Row, Col, Input, Button } from 'react-materialize'
+import { connect } from 'react-redux'
 
 import TasksList from './TasksList'
+import { addTask } from '../actions'
 
 const mainStyle = {
   marginTop: 50
 }
 
-export default class MainPage extends React.Component {
+class MainPage extends React.Component {
   constructor () {
     super()
     this.state = {
@@ -87,3 +89,17 @@ export default class MainPage extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTask: (newTask) => dispatch(addTask(newTask))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
