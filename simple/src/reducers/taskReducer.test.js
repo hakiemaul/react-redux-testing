@@ -5,7 +5,7 @@ describe('taskReducer testing', () => {
     const initialState = []
 
     const expectedState = initialState
-    const actualState = taskReducer(initialState, null)
+    const actualState = taskReducer(initialState, {})
 
     expect(actualState).toEqual(expectedState)
   })
