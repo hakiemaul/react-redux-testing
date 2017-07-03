@@ -1,9 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Navbar, NavItem } from 'react-materialize'
 
 import MainPage from './MainPage'
-import TaskList from './TaskList'
+import TasksList from './TasksList'
 
 describe('<MainPage /> component', () => {
   it('renders normally', () => {
@@ -19,25 +18,25 @@ describe('<MainPage /> component', () => {
 
   it('should have tasks state', () => {
     const mainWrapper = shallow(<MainPage />)
-    const tasksState = mainWrapper.state('todos')
+    const tasksState = mainWrapper.state('tasks')
     expect(tasksState).toHaveLength(1)
   })
 
   it('tasks state should be an array', () => {
     const mainWrapper = shallow(<MainPage />)
-    const tasksState = mainWrapper.state('todos')
-    expect(typeof tasksState).toEqual('array')
+    const tasksState = mainWrapper.state('tasks')
+    expect(Array.isArray(tasksState)).toEqual(true)
   })
 
   it('individual task should be an object', () => {
     const mainWrapper = shallow(<MainPage />)
-    const tasksState = mainWrapper.state('todos')
+    const tasksState = mainWrapper.state('tasks')
     expect(typeof tasksState[0]).toEqual('object')
   })
 
-  it('should have one TaskList component', () => {
+  it('should have one TasksList component', () => {
     const mainWrapper = shallow(<MainPage />)
-    const tasksList = mainWrapper.find(TaskList)
+    const tasksList = mainWrapper.find(TasksList)
     expect(tasksList).toHaveLength(1)
   })
 })

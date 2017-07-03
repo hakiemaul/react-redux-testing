@@ -6,6 +6,14 @@ const mainStyle = {
 }
 
 export default class MainPage extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      tasks: [
+        { id: 1, tasks: 'Thunder Talk' }
+      ]
+    }
+  }
   render () {
     return (
       <div style={mainStyle}>
