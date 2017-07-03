@@ -10,6 +10,7 @@ export default class TasksList extends React.Component {
             <tr>
               <th>ID</th>
               <th>Task</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -17,6 +18,7 @@ export default class TasksList extends React.Component {
               <tr key={task.id}>
                 <td>{task.id}</td>
                 <td>{task.tasks}</td>
+                <td><a className="waves-effect waves-light btn" onClick={() => this.props._deleteTask(task.id)}>Delete</a></td>
               </tr>
             ))}
           </tbody>

@@ -34,6 +34,33 @@ describe('<MainPage /> component', () => {
     expect(typeof tasksState[0]).toEqual('object')
   })
 
+  it('should have taskinput state', () => {
+    const mainWrapper = shallow(<MainPage />)
+    const tasksState = mainWrapper.state('taskInput')
+    expect(tasksState).toEqual('')
+  })
+
+  it('should change taskinput with taskinputlistener()', () => {
+    const mainWrapper = shallow(<MainPage />)
+    mainWrapper.instance()._taskInputListener("blablabla")
+
+    const taskInput = mainWrapper.state('taskInput')
+    expect(taskInput).toEqual("blablabla")
+  })
+
+  it('should add new task to tasks state', () => {
+    const mainWrapper = shallow(<MainPage />)
+    const expectedState = [
+      { id: 1, tasks: 'Thunder Talk'},
+      { id: 2, tasks: 'blablabla'}
+    ]
+
+    mainWrapper.instance()._addTask('blablabla')
+    const actualState = mainWrapper.state('tasks')
+
+    expect(actualState).toEqual(expectedState)
+  })
+
   it('should have one TasksList component', () => {
     const mainWrapper = shallow(<MainPage />)
     const tasksList = mainWrapper.find(TasksList)
