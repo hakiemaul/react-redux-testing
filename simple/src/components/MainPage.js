@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Input } from 'react-materialize'
+import { Row, Col, Input, Button } from 'react-materialize'
 
 import TasksList from './TasksList'
 
@@ -19,6 +19,8 @@ export default class MainPage extends React.Component {
 
     this._deleteTask = this._deleteTask.bind(this)
     this._taskInputListener = this._taskInputListener.bind(this)
+    this._addTask = this._addTask.bind(this)
+    this._keyPressListener = this._keyPressListener.bind(this)
   }
 
   _deleteTask (taskId) {
@@ -30,15 +32,19 @@ export default class MainPage extends React.Component {
   }
 
   _addTask (addedTask) {
-    const latestId = this.state.tasks[this.state.tasks.length - 1].id + 1
+    var latestId = 0
+    if (this.state.tasks[0]) {
+      latestId = this.state.tasks[this.state.tasks.length - 1].id + 1
+    } else latestId = 1
 
     const newTask = {
       id: latestId,
       tasks: addedTask
     }
-    
+
     this.setState({
-      tasks: [...this.state.tasks, newTask]
+      tasks: [...this.state.tasks, newTask],
+      taskInput: ''
     })
   }
 
@@ -46,6 +52,12 @@ export default class MainPage extends React.Component {
     this.setState({
       taskInput: input
     })
+  }
+
+  _keyPressListener (e) {
+    if (e.key === 'Enter') {
+      this._addTask(this.state.taskInput)
+    }
   }
 
   render () {
@@ -66,7 +78,9 @@ export default class MainPage extends React.Component {
             <Input placeholder="Add your new task"
                    s={12} label="New Task"
                    onChange={(e) => this._taskInputListener(e.target.value)}
+                   onKeyPress={this._keyPressListener}
                    value={this.state.taskInput} />
+            <Button className='addButton' waves='light' onClick={() => this._addTask(this.state.taskInput)}>Add</Button>
           </Col>
         </Row>
       </div>

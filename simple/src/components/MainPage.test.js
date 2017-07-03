@@ -61,6 +61,20 @@ describe('<MainPage /> component', () => {
     expect(actualState).toEqual(expectedState)
   })
 
+  it('should add new task if "Add Task" button is clicked', () => {
+    const mainWrapper = shallow(<MainPage />)
+    const expectedState = [
+      { id: 1, tasks: 'Thunder Talk'},
+      { id: 2, tasks: ''}
+    ]
+
+    const addButton = mainWrapper.find('.addButton')
+    addButton.simulate('click')
+    const actualState = mainWrapper.state('tasks')
+
+    expect(actualState).toEqual(expectedState)
+  })
+
   it('should have one TasksList component', () => {
     const mainWrapper = shallow(<MainPage />)
     const tasksList = mainWrapper.find(TasksList)
