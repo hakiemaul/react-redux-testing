@@ -1,6 +1,8 @@
 import React from 'react'
 import { Row, Col } from 'react-materialize'
 
+import TasksList from './TasksList'
+
 const mainStyle = {
   marginTop: 50
 }
@@ -18,8 +20,13 @@ export default class MainPage extends React.Component {
     return (
       <div style={mainStyle}>
         <Row>
-          <Col s={4} offset='s4'>
-            <h1>Tes</h1>
+          <Col s={8} offset='s2'>
+            <h1 className='center-align'>Simple App for Jest Practice</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col s={6} offset='s3'>
+            <TasksList tasks={this.state.tasks} />
           </Col>
         </Row>
       </div>
