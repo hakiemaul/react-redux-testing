@@ -2,7 +2,7 @@ import taskReducer from './taskReducer'
 
 describe('taskReducer testing', () => {
   it('should return initial tasks state', () => {
-    const initialState = []
+    const initialState = [{ id: 1, tasks: 'Thunder Talk' }]
 
     const expectedState = initialState
     const actualState = taskReducer(initialState, {})
@@ -11,11 +11,8 @@ describe('taskReducer testing', () => {
   })
 
   it('should add new task to state', () => {
-    const initialState = []
-    const newTask = {
-      id: 1,
-      tasks: 'Bla'
-    }
+    const initialState = [{ id: 1, tasks: 'Thunder Talk' }]
+    const newTask = 'Bla'
     const action = {
       type: 'ADD_TASK',
       payload: newTask
@@ -24,7 +21,7 @@ describe('taskReducer testing', () => {
     const expectedState = [...initialState, newTask]
     const actualState = taskReducer(initialState, action)
 
-    expect(actualState).toEqual(expectedState)
+    expect(actualState).toHaveLength(2)
   })
 
   it('should remove task from state', () => {
